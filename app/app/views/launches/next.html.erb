@@ -1,19 +1,31 @@
-<div id="container">
-  <div id="main">
-    <div>
-      <span>Next launch:</span>
-      <h1><%= @launch.name %></h1>
-      <h2><%= l @launch.time, format: :long %></h1>
+<% if @launch.present? %>
+
+  <div id="container">
+    <div id="main">
+      <div>
+        <span>Next launch:</span>
+        <h1><%= @launch.name %></h1>
+        <h2><%= l @launch.time, format: :long %></h1>
+      </div>
+      <img src="<%= @launch.patch %>">
     </div>
-    <img src="<%= @launch.patch %>">
+    <div id="links">
+      <% if @launch.wikipedia.present? %>
+        <a href="<%= @launch.wikipedia %>">Wikipedia</a>
+      <% end %>
+      <% if @launch.youtube_id.present? %>
+        <a href="https://youtu.be/<%= @launch.youtube_id %>">YouTube</a>
+      <% end %>
+    </div>
   </div>
-  <div id="links">
-    <% if @launch.wikipedia.present? %>
-      <a href="<%= @launch.wikipedia %>">Wikipedia</a>
-    <% end %>
-    <% if @launch.youtube_id.present? %>
-      <a href="https://youtu.be/<%= @launch.youtube_id %>">YouTube</a>
-    <% end %>
+
+<% else %>
+
+  <div id="container">
+    <div id="main">
+      <h1>No upcoming launch</h1>
+    </div>
   </div>
-</div>
+
+<% end %>
 
