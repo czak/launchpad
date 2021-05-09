@@ -6,8 +6,6 @@ class CreateLaunches < ActiveRecord::Migration[6.1]
       t.string :youtube_id
       t.string :wikipedia
       t.string :patch
-
-      t.timestamps
     end
   end
 end

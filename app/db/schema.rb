@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(version: 2021_05_09_095328) do
     t.string "youtube_id"
     t.string "wikipedia"
     t.string "patch"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
