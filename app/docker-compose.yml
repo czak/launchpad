@@ -8,9 +8,8 @@ services:
       - postgres:/var/lib/postgresql/data/pgdata
     environment:
       PGUSER: postgres
-      POSTGRES_DB: launchpad_development
       PGDATA: /var/lib/postgresql/data/pgdata
-      # TZ: Europe/London
+      POSTGRES_DB: launchpad_development
       POSTGRES_HOST_AUTH_METHOD: "trust"
 
 volumes:
