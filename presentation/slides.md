@@ -377,3 +377,10 @@ spec:
         - secretRef:
             name: database-env
 ```
+
+---
+
+## Next steps
+
+- Deployments
+- Automation
