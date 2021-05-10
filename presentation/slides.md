@@ -295,6 +295,16 @@ spec:
 
 ---
 
+## What have we done?
+
+1. Ran a Rails web server in a `web` pod
+2. Ran a Postgres db in a `database` pod
+3. Exposed `database` **internally** in the cluster via `Service`
+4. Exposed `web` **externally** to the web via `Service`+`Ingress`
+5. Ran a Rails runner process in a `worker` pod
+
+---
+
 ## Deploy to production
 
 ```txt
@@ -383,4 +393,9 @@ spec:
 ## Next steps
 
 - Deployments
+- Sealed secrets
 - Automation
+
+---
+
+# Thank you :)
