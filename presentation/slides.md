@@ -292,3 +292,88 @@ spec:
         - name: DATABASE_URL
           value: postgres://launchpad:topsecret@database/launchpad
 ```
+
+---
+
+## Deploy to production
+
+```txt
+$ kubectl config use-context launchpad-production
+$ kubectl apply -f production/
+$ kubectl exec web -- bin/rails db:migrate
+```
+
+---
+
+## Web secrets
+
+```sh
+# secrets/web.env
+RAILS_ENV=production
+RAILS_LOG_TO_STDOUT=true
+RAILS_SERVE_STATIC_FILES=true
+RAILS_MASTER_KEY=8bd9f3468d31f56f8cf23a952099f96b
+DATABASE_URL=postgres://launchpad:topsecret@database/launchpad
+```
+
+```txt
+$ kubectl create secret generic web-env \
+    --from-env-file secrets/web.env
+```
+
+---
+
+## Use secret to populate env
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  containers:
+    - name: web
+      image: czak/launchpad
+      command: ["bin/rails", "server"]
+      envFrom:
+        - secretRef:
+            name: web-env
+```
+
+---
+
+## Database secrets 
+
+```sh
+# secrets/database.env
+POSTGRES_DB=launchpad
+POSTGRES_USER=launchpad
+POSTGRES_PASSWORD=topsecret
+```
+
+```txt
+$ kubectl create secret generic database-env \
+    --from-env-file secrets/database.env
+```
+
+---
+
+## Use secret to populate env
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: database
+  labels:
+    app: database
+spec:
+  containers:
+    - name: database
+      image: postgres:13-alpine
+      envFrom:
+        - secretRef:
+            name: database-env
+```
