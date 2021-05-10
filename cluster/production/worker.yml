@@ -5,15 +5,8 @@ metadata:
 spec:
   containers:
     - name: worker
-      image: czak/launchpad-base:25bea0f06f2e68eb64f692b62929d345
-      command:
-        - sh
-        - -c
-        - |
-          set -e
-          git clone https://github.com/czak/launchpad.git
-          cd launchpad/app
-          bin/rails runner bin/worker.rb
+      image: czak/launchpad:39919fe
+      command: ["bin/rails", "runner", "bin/worker.rb"]
       envFrom:
         - secretRef:
             name: web-env
