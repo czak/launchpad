@@ -56,6 +56,14 @@ a {
   color: white;
 }
 
+pre {
+  position: fixed;
+  margin: 0;
+  font-size: 1.5em;
+  bottom: 10px;
+  left: 10px;
+}
+
 @media (min-width: 576px) {
   h1 {
     font-size: 3em;
