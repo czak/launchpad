@@ -1,26 +1,32 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: web
-  labels:
-    app: web
 spec:
-  containers:
-    - name: web
-      image: ghcr.io/czak/launchpad
-      command: ["bin/rails", "server"]
-      env:
-        - name: RAILS_ENV
-          value: production
-        - name: RAILS_LOG_TO_STDOUT
-          value: "true"
-        - name: RAILS_SERVE_STATIC_FILES
-          value: "true"
-      envFrom:
-        - secretRef:
-            name: web-env
-  imagePullSecrets:
-    - name: ghcr-docker-auth
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/czak/launchpad
+          command: ["bin/rails", "server"]
+          env:
+            - name: RAILS_ENV
+              value: production
+            - name: RAILS_LOG_TO_STDOUT
+              value: "true"
+            - name: RAILS_SERVE_STATIC_FILES
+              value: "true"
+          envFrom:
+            - secretRef:
+                name: web-env
+      imagePullSecrets:
+        - name: ghcr-docker-auth
 ---
 apiVersion: v1
 kind: Service
