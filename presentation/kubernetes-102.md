@@ -1,6 +1,6 @@
 # Kubernetes 102
 
-_from getting started to the real world_
+_from "Hello World" to the real world_
 
 ---
 
@@ -162,17 +162,7 @@ $ kubectl rollout history \
 
 ---
 
-## Instrument Pods
+## Automate with GitHub
 
-For zero-downtime rolling deployments:
-
-```
-readinessProbe:
-  httpGet:
-    path: /
-    port: 3000
-lifecycle:
-  preStop:
-    exec:
-      command: ["sleep", "15"]
-```
+* Create a restricted user for GitHub
+* Trigger rollout from a GitHub action
