@@ -30,3 +30,9 @@ jobs:
           tags: |
             ghcr.io/czak/launchpad:${{ github.sha }}
             ghcr.io/czak/launchpad:latest
+      -
+        name: Rollout to cluster
+        run: |
+          kubectl \
+            --kubeconfig <(echo "$KUBE_CONFIG_DATA" | base64 --decode) \
+            set image deployment web web=ghcr.io/czak/launchpad:${{ github.sha }}
