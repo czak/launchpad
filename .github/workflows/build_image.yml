@@ -27,6 +27,8 @@ jobs:
         with:
           context: app
           push: true
+          cache-from: type=registry,ref=ruby:2.7.2-alpine,ref=ghcr.io/czak/launchpad:latest
+          cache-to: type=inline
           tags: |
             ghcr.io/czak/launchpad:${{ github.sha }}
             ghcr.io/czak/launchpad:latest
@@ -34,5 +36,5 @@ jobs:
         name: Rollout to cluster
         run: |
           kubectl \
-            --kubeconfig <(echo "$KUBE_CONFIG_DATA" | base64 --decode) \
+            --kubeconfig <(echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 --decode) \
             set image deployment web web=ghcr.io/czak/launchpad:${{ github.sha }}
