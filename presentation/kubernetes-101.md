@@ -6,7 +6,6 @@ _from zero to cluster in 30 minutes or less_
 
 ## Why?
 
-* Connect Native: 2 processes + 1 db
 * Standardized way to *orchestrate* systems
 * Getting easier and cheaper to start
 

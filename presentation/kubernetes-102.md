@@ -155,8 +155,14 @@ $ kubectl set image \
 ```
 
 ```sh
-# Roll back to previous version
+# Check history
 $ kubectl rollout history \
+    deployment web
+```
+
+```sh
+# Roll back to previous version
+$ kubectl rollout undo \
     deployment web
 ```
 
@@ -166,3 +172,28 @@ $ kubectl rollout history \
 
 * Create a restricted user for GitHub
 * Trigger rollout from a GitHub action
+
+---
+
+## Bonus: HTTPS
+
+```
+$ kubectl create secret tls launchpad-tls-cert \
+    --cert launchpad.crt \
+    --key launchpad.key
+```
+
+```yaml
+# Add to Ingress:
+spec:
+  tls:
+    - secretName: launchpad-tls-cert
+```
+
+---
+
+## Bonus: Lens
+
+---
+
+# Thank you :)

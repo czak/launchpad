@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: worker
+  labels:
+    app: worker
+spec:
+  containers:
+    - name: worker
+      image: czak/launchpad:v1
+      command: ["bin/rails", "runner", "bin/worker.rb"]
+      env:
+        - name: RAILS_ENV
+          value: production
+        - name: RAILS_LOG_TO_STDOUT
+          value: "true"
+        - name: RAILS_SERVE_STATIC_FILES
+          value: "true"
+        - name: RAILS_MASTER_KEY
+          value: 8bd9f3468d31f56f8cf23a952099f96b
+        - name: DATABASE_URL
+          value: postgres://launchpad:topsecret@database/launchpad
